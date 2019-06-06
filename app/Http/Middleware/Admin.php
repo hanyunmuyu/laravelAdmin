@@ -26,8 +26,21 @@ class Admin
             return redirect('/admin/login');
         }
         $admin = auth('admin')->user();
-        view()->share('admin',$admin);
-        view()->share('permissionList',$admin->permission()->toArray());
+        view()->share('admin', $admin);
+        $permissionList = $admin->permission()->toArray();
+        $permissions = [];
+        foreach ($permissionList as $permission) {
+            if ($permission['pid'] != 0) {
+                if (!isset($parent[$permission['pid']])) {
+                    $permissions[$permission['pid']]['subList'][] = $permission;
+                } else {
+                    $permissions[$permission['id']] = $permission;
+                }
+            } else {
+                $permissions[$permission['id']] = $permission;
+            }
+        }
+        view()->share('permissionList', $permissions);
         return $next($request);
     }
 }
