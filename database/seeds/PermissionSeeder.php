@@ -23,8 +23,14 @@ class PermissionSeeder extends Seeder
                 'permission_name' => '角色管理',
                 'url' => null,
                 'subList' => [
-                    'permission_name' => '角色列表',
-                    'url' => '/admin/role',
+                    [
+                        'permission_name' => '角色列表',
+                        'url' => '/admin/role',
+                    ],
+                    [
+                        'permission_name' => '角色列表',
+                        'url' => '/admin/role/edit',
+                    ]
                 ]
             ]
         ];
@@ -40,8 +46,10 @@ class PermissionSeeder extends Seeder
             unset($permission['subList']);
             $p = \App\Models\Permission::firstOrCreate($permission);
             if ($p) {
-                $subList['pid'] = $p->id;
-                $this->addPermission($subList);
+                foreach ($subList as $sub) {
+                    $sub['pid'] = $p->id;
+                    $this->addPermission($sub);
+                }
             }
         } else {
             \App\Models\Permission::firstOrCreate($permission);

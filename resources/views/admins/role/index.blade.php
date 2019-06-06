@@ -19,7 +19,20 @@
 
         <!-- Main content -->
         <section class="content">
-
+            <table class="table table-hover" role="table">
+                <tr>
+                    <td>id</td>
+                    <td>角色名称</td>
+                    <td>管理</td>
+                </tr>
+                @foreach($roleList as $role)
+                    <tr>
+                        <td>{{$role->id}}</td>
+                        <td>{{$role->role_name}}</td>
+                        <td><a class="btn btn-primary" href="{{url('/admin/role/edit?id='.$role->id)}}">编辑</a></td>
+                    </tr>
+                @endforeach
+            </table>
         </section>
         <!-- /.content -->
     </div>

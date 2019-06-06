@@ -19,4 +19,5 @@ Route::group(['middleware'=>['admin.auth']], function () {
     //后台首页
     Route::get('/index', 'IndexController@index');
     Route::get('/role', 'RoleController@index');
+    Route::get('/role/edit/{id?}', 'RoleController@edit');
 });

@@ -29,6 +29,7 @@ class Admin
         view()->share('admin', $admin);
         $permissionList = $admin->permission()->toArray();
         $permissions = [];
+        $flag = false;
         foreach ($permissionList as $permission) {
             if ($permission['pid'] != 0) {
                 if (!isset($parent[$permission['pid']])) {
@@ -39,6 +40,20 @@ class Admin
             } else {
                 $permissions[$permission['id']] = $permission;
             }
+            if ($request->is(trim($permission['url'], '/'))) {
+                $flag = true;
+            }
+        }
+        //遍历所有权限，判断权限
+        if (!$flag) {
+            if ($request->ajax()) {
+                response()->json([
+                    'code' => 4000,
+                    'status' => 'error',
+                    'msg' => '认证失败'
+                ]);
+            }
+            abort(403);
         }
         view()->share('permissionList', $permissions);
         return $next($request);
