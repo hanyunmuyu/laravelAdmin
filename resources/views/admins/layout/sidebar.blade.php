@@ -5,10 +5,10 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{auth('admin')->user()->avatar}}" class="img-circle" alt="User Image">
+                <img src="{{$admin->avatar}}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>{{auth('admin')->user()->name}}</p>
+                <p>{{$admin->name}}</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -26,6 +26,8 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">主导航</li>
+            @foreach($permissionList as $permission)
+            @endforeach
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>控制面板</span>
@@ -80,13 +82,13 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-group"></i>
-                    <span>社团管理</span>
+                    <span>角色管理</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('/admin/community/apply')}}"><i class="fa fa-circle-o"></i>新申请的社团</a></li>
+                    <li><a href="{{url('/admin/role')}}"><i class="fa fa-circle-o"></i>角色列表</a></li>
                     <li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
                     <li><a href="../UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
                     <li><a href="../UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>

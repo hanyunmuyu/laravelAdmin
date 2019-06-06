@@ -228,16 +228,16 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{auth('admin')->user()->avatar}}" class="user-image" alt="User Image">
-                        <span class="hidden-xs">{{auth('admin')->user()->name}}</span>
+                        <img src="{{$admin->avatar}}" class="user-image" alt="User Image">
+                        <span class="hidden-xs">{{$admin->name}}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="{{auth('admin')->user()->avatar}}" class="img-circle" alt="User Image">
+                            <img src="{{$admin->avatar}}" class="img-circle" alt="User Image">
                             <p>
-                                管理员
-                                <small>最近登录{{auth('admin')->user()->updated_at}}</small>
+                                {{$admin->role()->role_name}}
+                                <small>最近登录{{$admin->updated_at}}</small>
                             </p>
                         </li>
                         <!-- Menu Footer-->

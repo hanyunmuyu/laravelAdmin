@@ -17,6 +17,11 @@ class Admin extends Authenticatable
 
     public function role()
     {
-        return $this->hasOne('\App\Models\Role');
+        return $this->belongsTo('\App\Models\Role')->first();
+    }
+
+    public function permission()
+    {
+        return $this->role()->permission();
     }
 }

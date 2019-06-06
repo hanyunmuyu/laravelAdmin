@@ -25,6 +25,9 @@ class Admin
             }
             return redirect('/admin/login');
         }
+        $admin = auth('admin')->user();
+        view()->share('admin',$admin);
+        view()->share('permissionList',$admin->permission()->toArray());
         return $next($request);
     }
 }
