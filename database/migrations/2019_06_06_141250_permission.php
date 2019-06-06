@@ -26,6 +26,8 @@ class Permission extends Migration
             $table->string('url')
                 ->nullable()
                 ->unique();
+            $table->unsignedTinyInteger('is_show')
+                ->default(1);
 
             $table->unsignedInteger('pid')
                 ->default(0);

@@ -31,7 +31,13 @@ class Admin
         $permissions = [];
         $flag = false;
         foreach ($permissionList as $permission) {
+            if ($request->is(trim($permission['url'], '/'))) {
+                $flag = true;
+            }
             if ($permission['pid'] != 0) {
+                if (!$permission['is_show']) {
+                    continue;
+                }
                 if (!isset($parent[$permission['pid']])) {
                     $permissions[$permission['pid']]['subList'][] = $permission;
                 } else {
@@ -39,9 +45,6 @@ class Admin
                 }
             } else {
                 $permissions[$permission['id']] = $permission;
-            }
-            if ($request->is(trim($permission['url'], '/'))) {
-                $flag = true;
             }
         }
         //遍历所有权限，判断权限

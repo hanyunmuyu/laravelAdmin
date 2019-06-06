@@ -28,7 +28,8 @@ class PermissionSeeder extends Seeder
                         'url' => '/admin/role',
                     ],
                     [
-                        'permission_name' => '角色列表',
+                        'permission_name' => '编辑角色',
+                        'is_show' => 0,
                         'url' => '/admin/role/edit',
                     ]
                 ]
