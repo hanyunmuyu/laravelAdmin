@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Cache;
 
 class Admin
 {
@@ -27,7 +28,12 @@ class Admin
         }
         $admin = auth('admin')->user();
         view()->share('admin', $admin);
-        $permissionList = $admin->permission()->toArray();
+        if (!Cache::has('permissionList')) {
+            $permissionList = $admin->permission()->toArray();
+            Cache::put('permissionList', $permissionList);
+        } else {
+            $permissionList = Cache::get('permissionList');
+        }
         $permissions = [];
         $flag = false;
         foreach ($permissionList as $permission) {

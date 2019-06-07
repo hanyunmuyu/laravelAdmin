@@ -1,4 +1,4 @@
-@extends('admin.layout.layout')
+@extends('admins.layout.layout')
 @section('title',"首页")
 @section('css')
 @endsection
